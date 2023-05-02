@@ -1,7 +1,8 @@
-!.github
-!.gitignore
-!.eslintignore
-!.eslintrc.json
+node_modules
+.github
+.gitignore
+.eslintignore
+.eslintrc.json
 
 # logs
 .Rhistory
