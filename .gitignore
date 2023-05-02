@@ -1,0 +1,13 @@
+!.github
+!.gitignore
+!.eslintignore
+!.eslintrc.json
+
+# logs
+.Rhistory
+
+# Mac 
+.DS_Store
+
+# IDE / Editore
+.vscode
