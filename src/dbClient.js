@@ -7,12 +7,12 @@ const cacheHostName = process.env.REDIS_HOST_NAME;
 const cachePassword = process.env.AZURE_CACHE_FOR_REDIS_ACCESS_KEY;
 
 // Check if the required environment variables are set
-if(!cacheHostName) throw new Error("AZURE_CACHE_FOR_REDIS_HOST_NAME is not set")
-if(!cachePassword) throw new Error("AZURE_CACHE_FOR_REDIS_ACCESS_KEY is not set")
+// if(!cacheHostName) throw new Error("AZURE_CACHE_FOR_REDIS_HOST_NAME is not set")
+// if(!cachePassword) throw new Error("AZURE_CACHE_FOR_REDIS_ACCESS_KEY is not set")
 
 // Create a new Redis client instance with SSL enabled
 const db = redis.createClient({
-  url: `rediss://${cacheHostName}:6380`,
+  url: `rediss://${cacheHostName}:6379`,
   password: cachePassword,
 
   retry_strategy: (options) => {
