@@ -35,9 +35,9 @@ jobs:
         redis-version: ${{ matrix.redis-version }}
     - run: pwd
     - run: npm install
-       working-directory:.userapi
+       path:~userapi
     #- run: npm run build --if-present
     - run: npm test
-       working-directory:'userapi/test'
+       path:'~userapi/test'
 
       
