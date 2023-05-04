@@ -18,10 +18,12 @@ jobs:
         node-version: '14.x'
 
     - name: Install dependencies
-      run: cd devops/userapi && npm install
+      run: cd DSTI_DevOps_2023
+/userapi && npm install
 
     - name: Start Redis server
       uses: redis-actions/start-redis@v1
 
     - name: Run tests
-      run: cd devops/userapi/test && npm test
+      run: cd DSTI_DevOps_2023
+/userapi/test && npm test
