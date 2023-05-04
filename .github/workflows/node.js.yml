@@ -34,10 +34,9 @@ jobs:
       with:
         redis-version: ${{ matrix.redis-version }}
     - run: pwd
-    - run: npm install
+    - run: npm install --prefix ./userapi
        path:userapi
     #- run: npm run build --if-present
-    - run: npm test
-       path:'userapi/test'
+    - run: npm test --prefix './userapi/test'
 
       
