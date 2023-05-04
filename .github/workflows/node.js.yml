@@ -30,7 +30,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: '.userapi/package.json'
+        cache-dependency-path: 'userapi/package.json'
     - name: Start Redis
       uses: supercharge/redis-github-action@1.5.0
       with:
