@@ -39,3 +39,4 @@ jobs:
     - run: npm install
     - run: npm run build --if-present
     - run: npm test
+       working-directory:userapi/test
