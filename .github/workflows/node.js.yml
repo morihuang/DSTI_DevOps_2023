@@ -40,4 +40,5 @@ jobs:
     - run: npm run build --if-present
        working-directory:userapi/test
     - run: npm test
+       working-directory:'**/userapi/test'
       
