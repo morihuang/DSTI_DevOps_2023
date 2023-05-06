@@ -1,11 +1,11 @@
 version: '3'
-services:
+services: # each service becomes a container that has a host name
   redis:
     image: "redis:alpine"
     command: redis-server
     expose:
       - 6379
-    volumes:
+    volumes: # specify the path 
       - db-data:/data
   # web:
   #   depends_on:
