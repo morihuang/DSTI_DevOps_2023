@@ -5,5 +5,5 @@ COPY package.json .
 RUN npm install
 COPY . .
 
-EXPOSE 8080
-CMD [ "npm", "start" ]
+EXPOSE 3000
+CMD [ "npm", "start", "index.js" ]

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-proj
+  labels: 
+    app: nodeapp
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        app: nodeapp
+    spec:
+      containers:
+      - name: nodeserver
+        image: mori0856/dstidevopsapp:latest
+        ports:
+        - containerPort: 3000
+
+      - name: redisdb
+        image: mori0856/dstidevopsredis:latest
+        ports:
+        - containerPort: 6379
+
