@@ -1,11 +1,11 @@
 const express = require('express')
-const userRouter = require('../userapi/src/routes/user')
+const userRouter = require('./routes/user')
 const bodyParser = require('body-parser')
 
 const app = express()
 const port = process.env.PORT || 3000
 
-const db = require('../userapi/src/dbClient')
+const db = require('./dbClient')
 db.on("error", (err) => {
   console.error(err)
 })
