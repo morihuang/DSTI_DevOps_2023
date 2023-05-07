@@ -4,7 +4,7 @@ module.exports = {
   create: (user, callback) => {
     // Check parameters
     if(!user.username)
-      return callback(new Error("Wrong user parameters"), null)
+      return callback(new Error("payload missing user parameters"), null)
     // Create User schema
     const userObj = {
       firstname: user.firstname,
@@ -27,7 +27,7 @@ module.exports = {
   },
   //get: (username, callback) => {
    // TODO create this method
-   get: (username, callback) => {
+  get: (username, callback) => {
     if(!username)
       return callback(new Error("Username must be provided"), null)
     db.hgetall(username, function(err, res) {

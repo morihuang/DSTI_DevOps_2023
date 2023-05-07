@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-proj-service
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000 
+    protocol: TCP
+    name: nodejs
+  - port: 6379
+    targetPort: 6379
+    protocol: TCP
+    name: redisdb
+  type: NodePort
+  selector:
+    app: devops-proj
