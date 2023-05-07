@@ -4,7 +4,7 @@ In this task we will use [github actions](https://github.com/actions) for CI the
 
 ## Installations
 launch an ec2 instance on [AWS console](https://aws.amazon.com/console/) and open ports 8080, 22 and 80 in your security group
-![AWS EC2 GUI](..images/ec2-launch)
+![AWS ec2 console](images/ec2-launch.png)
 
 ssh into the machine.
 
