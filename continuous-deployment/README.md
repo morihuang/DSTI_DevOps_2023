@@ -1,9 +1,10 @@
 # Continuous Testing continuous integration and continuous delivery/deployment using Jenkins
 
-In this task we will use [github actions](https://github.com/actions) and Jenkins.
+In this task we will use [github actions](https://github.com/actions) for CI then Jenkins for CI/CD.
 
 ## Installations
 launch an ec2 instance on [AWS console](https://aws.amazon.com/console/) and open ports 8080, 22 and 80 in your security group
+![ec2-launch](./images)
 
 ssh into the machine.
 
@@ -21,15 +22,15 @@ sudo apt install jenkins -y
 sudo systemctl start jenkins
 
 ```
-Open the GUI of the jenkins engine with the password copied from 
+Open the GUI of the Jenkins engine with the username set at installation step and the password copied from 
 ```
 /var/lib/jenkins/secrets/initialAdminPassword
 ```
 
 ## Jenkins configuration
-from the jenkins GUI install plugins neccessary such as Nodejs, docker plugin, git and others
+From the Jenkins GUI install plugins necessary such as Nodejs, docker plugin, git and others
 
-install redis-server from your ssh connection
+Install redis-server from your ssh connection, start the server and check its status
 ```
 curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 
@@ -38,15 +39,19 @@ echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://pack
 sudo apt-get update
 sudo apt-get install redis
 ```
-Install [docker engine](https://docs.docker.com/engine/install/ubuntu/)
+## Install [docker engine](https://docs.docker.com/engine/install/ubuntu/)
 
-create credentials for github and dockerhub and an NGINX server to manage sorce codes, building images and deployment to servers respectively
+Crreate credentials for github and dockerhub and an NGINX server to manage source codes, build images and deploy image to servers respectively( these credentials are needed because the repositories are private)
 
 ## Create a pipeline project 
 
-On jenkins once all installations have been made, create the pipeline project and create your Jenkinsfile which is pushed into the SCM,
+On Jenkins once all installations have been made, 
+* create the pipeline project,
+* create your Jenkinsfile
+* create Dockerfile 
+ which are pushed into the SCM(github)
 
-Remember that you need to integrate your version control system with jenkins
+Remember that you need to integrate your version control system with Jenkins
 
 
-Run your pipeline by triggering a commit into the repository and make necessary dugging
+Run your pipeline by triggering a commit into the repository and make necessary debugging
