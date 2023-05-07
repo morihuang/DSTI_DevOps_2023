@@ -7,42 +7,64 @@ pipeline {
 
     stage('Cloning Git') {
       steps {
-        git url: 'https://github.com/debisic/lab-deploy.git',
-            credentialsId: 'git-jenkins'
+            git branch: 'test_may', credentialsId: 'PAT', url: 'https://github.com/debisic/lab-deploy.git'
       }
+      
     }
-    stage('Start Redis') {
-      steps {
-        sh 'docker run -d --name my-redis -p 6379:6379 redis'
-     }
-        }   
+    //stage('Start Redis') {
+      //steps {
+        //sh 'docker run -d --name my-redis -p 6379:6379 redis'
+     //}
+        //}   
 
     stage('Install dependencies') {
       steps {
-        sh 'cd userapi'
-        sh 'npm install'
+        sh 'cd userapi && npm install'
       }
     }
 
     stage('Test') {
       steps {
          sh 'cd userapi'
-         sh 'cd test'
-         sh 'npm test'
+         sh 'cd userapi/test && npm test'
       }
     }
 
-    // stage('Build') {
+    stage('Build') {
+      steps {
+         sh '''#!/bin/bash 
+          cd userapi/src/ && npm run'''
+      }
+    }
+    // stage('Deploy to Tomcat') {
     //   steps {
-    //      sh 'cd src'
-    //      sh 'npm run build'
+    //      deploy adapters: [tomcat9(credentialsId: 'TOMCAT', path: '', url: 'http://15.188.185.64:8080/')], contextPath: '/app', war: '**/*.war'
     //   }
     // }
-    stage('Deploy to Tomcat') {
+    stage('Build and Push Image') {
       steps {
-         deploy adapters: [tomcat9(credentialsId: 'TOMCAT', path: '', url: 'http://15.188.185.64:8080/')], contextPath: '/app', war: '**/*.war'
+        script {
+          def appImage = docker.build("our-node-app-dsti:${env.BUILD_NUMBER}", "--file userapi/Dockerfile .")
+          withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+            docker.withRegistry('https://registry.hub.docker.com', "${DOCKER_HUB_USERNAME}-dockerhub-credentials") {
+              appImage.push("${DOCKER_HUB_USERNAME}/our-node-app-dsti:${env.BUILD_NUMBER}")
+            }
+          }
+        }
       }
     }
 
+    stage('Deploy to Container') {
+      steps {
+        script {
+          withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+            docker.image("${DOCKER_HUB_USERNAME}/our-node-app-dsti:${env.BUILD_NUMBER}").withRun('-p 80:3000') {
+              sh "echo 'Node.js app is running on port 3000'"
+            }
+          }
+        }
+      }
+    }
   }
-}
+
+  }
