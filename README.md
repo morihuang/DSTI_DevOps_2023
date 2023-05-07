@@ -85,3 +85,8 @@ kubectl apply -f deployment.yaml
 
 ## istio
 
+---
+
+## Trial and error
+
+We are not successfully connected web app and Redis within the Kubernetes deployment by the end of the submission, due to the fact that the port setting between Redis service and web app are not matching.
