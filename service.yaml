@@ -8,3 +8,10 @@ spec:
     targetPort: 3000 
     protocol: TCP
     name: nodejs
+  - port: 6379
+    targetPort: 6379
+    protocol: TCP
+    name: redisdb
+  type: NodePort
+  selector:
+    app: devops-proj

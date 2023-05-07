@@ -17,12 +17,11 @@ spec:
       containers:
       - name: nodeserver
         image: mori0856/dstidevopsapp:latest
-        imagePullPolicy: Never
         ports:
         - containerPort: 3000
 
       - name: redisdb
-        image: redis
+        image: mori0856/dstidevopsredis:latest
         ports:
         - containerPort: 6379
 
