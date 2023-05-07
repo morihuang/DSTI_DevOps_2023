@@ -1,6 +1,6 @@
 # Continuous Testing continuous integration and continuous delivery/deployment using Jenkins
 
-In this task we will use [github actions](https://github.com/actions).
+In this task we will use [github actions](https://github.com/actions) and Jenkins.
 
 ## Installations
 launch an ec2 instance on [AWS console](https://aws.amazon.com/console/) and open ports 8080, 22 and 80 in your security group
